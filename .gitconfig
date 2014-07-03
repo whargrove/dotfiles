@@ -1,0 +1,32 @@
+[user]
+	name = Wes Hargrove
+	email = whargrove@mac.com
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = Kaleidoscope
+[difftool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	st = status
+	kdt = difftool -y -t Kaleidoscope
+[color]
+	ui = true
+[push]
+	default = simple
+[credentials]
+	helper = osxkeychain
+[credential]
+	helper = osxkeychain
+[status]
+	relativePaths = false
+	short = true
+	branch = true
