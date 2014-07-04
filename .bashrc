@@ -1,6 +1,3 @@
-source ~/.git-completion.sh
-source ~/.git-prompt.sh
-
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR="atom"
@@ -11,6 +8,10 @@ export PS1='$(__git_ps1 "(%s)")\W$ '
 if
 	which rbenv > /dev/null;
 	then eval "$(rbenv init -)";
+fi
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
 fi
 
 GIT_PS1_SHOWDIRTYSTATE=1
