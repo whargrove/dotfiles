@@ -19,6 +19,7 @@ done
 shopt -u dotglob
 
 echo "** Starting files loop"
+echo "------------------------------------------"
 for f in "${files[@]}"
 do
   echo "** Checking if file: $f should be ignored ..."
@@ -37,6 +38,7 @@ do
 
   if $should_be_ignored ; then
     echo "** File: $f has been ignored"
+    echo "------------------------------------------"
     continue
   fi
 
@@ -53,4 +55,5 @@ do
   # Create symlink: source $f, target: ~/$f
   current_dir=$(pwd)
   ln -s $current_dir/$f ~/$f
+  echo "------------------------------------------"
 done
