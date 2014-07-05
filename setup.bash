@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create ignores array because we don't want to symlink these to ~
-ignores=("." ".." ".git" "setup.bash" "LICENSE" "README.md")
+ignores=(".git" "setup.bash" "LICENSE" "README.md")
 # Create files array to store file names
 files=()
 
