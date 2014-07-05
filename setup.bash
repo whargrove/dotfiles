@@ -35,5 +35,5 @@ do
 
   # Create symlink: source $f, target: ~/$f
   current_dir=$(pwd)
-  ln -s $current_dir$f ~/$f
+  ln -s $current_dir/$f ~/$f
 done
