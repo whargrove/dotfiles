@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
 # Create ignores array because we don't want to symlink these to ~
 ignores=("." ".." ".git" "setup.bash" "LICENSE" "README.md")
@@ -34,5 +34,6 @@ do
   fi
 
   # Create symlink: source $f, target: ~/$f
-  ln -s ./$f ~/$f
+  current_dir=$(pwd)
+  ln -s $current_dir$f ~/$f
 done
