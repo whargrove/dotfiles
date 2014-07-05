@@ -20,12 +20,18 @@ for f in "${files[@]}"
 do
   # If $f matches any ignores
   # Skip this loop iteration
+  should_be_ignored=false
   for i in "${ignores[@]}"
   do
     if [ $f = $i ]; then
-      continue
+      $should_be_ignored=true
+      break
     fi
   done
+
+  if $should_be_ignored ; then
+    continue
+  fi
 
   # If $f already exists in the user's home directory
   # Rename the file before creating the symlink
