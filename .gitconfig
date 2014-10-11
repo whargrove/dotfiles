@@ -1,6 +1,6 @@
 [user]
 	name = Wes Hargrove
-	email = wesleyhargrove.com
+	email = wesleyhargrove@gmail.com
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [diff]
