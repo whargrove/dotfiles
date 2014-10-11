@@ -1,6 +1,6 @@
 [user]
 	name = Wes Hargrove
-	email = whargrove@mac.com
+	email = wesleyhargrove.com
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [diff]
@@ -30,3 +30,6 @@
 	relativePaths = false
 	short = true
 	branch = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
