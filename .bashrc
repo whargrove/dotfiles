@@ -1,3 +1,6 @@
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR="bbedit"
