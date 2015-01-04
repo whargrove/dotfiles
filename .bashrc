@@ -25,23 +25,23 @@ GIT_PS1_SHOWDIRTYSTATE=1
 # Functions
 
 # Show all files for current working directory
-ll () {
+function ll {
 	ls -al
 }
 
 # Show all visible files for current working directory
-l () {
+function l {
 	ls
 }
 
 # Show pretty git log for repo in this dir
-gl () {
+function gl {
 	git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 }
 
 # Show all git branches (local and remote)
 # optional: -v to trigger verbose output and show latest commit hash and commit message
-gb () {
+function gb () {
 	option="${1}"
 	case ${option} in
 	-a)
@@ -52,6 +52,7 @@ gb () {
 		;;
 	-av)
 		git branch -av
+		;;
 	*)
 		git branch
 		;;
@@ -59,16 +60,16 @@ gb () {
 }
 
 # Show git status for current directory
-gs () {
+function gs {
 	git status
 }
 
 # Always use --simple-prompt flag
-irb () {
+function irb {
 	irb --simple-prompt
 }
 
 # Always use --simple-prompt flag
-pry () {
+function pry {
 	pry --simple-prompt
 }
