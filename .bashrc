@@ -3,7 +3,7 @@ source $(brew --prefix nvm)/nvm.sh
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
-export EDITOR="bbedit"
+export EDITOR="subl"
 export PATH=/usr/local/bin:/usr/local/Cellar/go/1.2.1/libexec/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PS1='$(__git_ps1 "(%s)")\W$ '
@@ -62,14 +62,4 @@ function gb () {
 # Show git status for current directory
 function gs {
 	git status
-}
-
-# Always use --simple-prompt flag
-function irb {
-	irb --simple-prompt
-}
-
-# Always use --simple-prompt flag
-function pry {
-	pry --simple-prompt
 }
