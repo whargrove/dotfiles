@@ -9,12 +9,12 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 export PS1='$(__git_ps1 "(%s)")\W$ '
 
 if
-	which rbenv > /dev/null;
-	then eval "$(rbenv init -)";
+  which rbenv > /dev/null;
+  then eval "$(rbenv init -)";
 fi
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+if [ -f $(brew --prefix)/etc/bash_completion.d ]; then
+  . $(brew --prefix)/etc/bash_completion.d
 fi
 
 GIT_PS1_SHOWDIRTYSTATE=1
@@ -24,8 +24,8 @@ alias "l"="ls"
 alias "speedtest"="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias "gs"="git status"
 alias "gl"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
-alias "gba"="git branch -av"
-alias "gb"="git branch -v"
+alias "gba"="git branch -a"
+alias "gb"="git branch"
 alias "irb"="irb --simple-prompt"
 alias "pry"="pry --simple-prompt"
 
