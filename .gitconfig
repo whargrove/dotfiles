@@ -35,4 +35,4 @@
 	smudge = git media smudge %f
 	required = true
 [core]
-	editor = bbedit
+	editor = subl
