@@ -1,6 +1,9 @@
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+# ASP.NET
+source dnvm.sh
+
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR="subl"
