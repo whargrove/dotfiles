@@ -1,10 +1,11 @@
-# export NVM_DIR=~/.nvm
-# source $(brew --prefix nvm)/nvm.sh
+# node.js version manager
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR="subl"
-export PATH=/usr/local/bin:/usr/local/Cellar/go/1.2.1/libexec/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PS1='$(__git_ps1 "(%s)")\W$ '
 
@@ -17,6 +18,10 @@ GIT_PS1_SHOWDIRTYSTATE=1
 
 # added by travis gem
 [ -f /Users/wesley/.travis/travis.sh ] && source /Users/wesley/.travis/travis.sh
+
+# Go stuff
+export GOPATH = $HOME/go
+export PATH=$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin
 
 # Functions
 
@@ -58,4 +63,15 @@ function gb () {
 # Show git status for current directory
 function gs {
   git status
+}
+
+# Code
+code() {
+  if [[ $# = 0 ]]
+  then
+    open -a "Visual Studio Code"
+  else
+    [[ $1 = /* ]] && F="$1" || F="$PWD/$1#./"
+    open -a "Visual Studio Code" --args "$F"
+  fi
 }
