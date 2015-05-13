@@ -12,10 +12,6 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PS1='$(__git_ps1 "(%s)")\W$ '
 
-# Go related things
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
 # Docker related things
 eval $(boot2docker shellinit)
 
@@ -44,8 +40,8 @@ GIT_PS1_SHOWDIRTYSTATE=1
 # added by travis gem
 [ -f /Users/wesley/.travis/travis.sh ] && source /Users/wesley/.travis/travis.sh
 
-# Go stuff
-export GOPATH = $HOME/go
+# golang
+export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin
 
 # Functions
