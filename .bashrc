@@ -35,6 +35,10 @@ if [ -f $(brew --prefix)/etc/bash_completion.d ]; then
   . $(brew --prefix)/etc/bash_completion.d
 fi
 
+# Java
+export JAVA_HOME=$(/usr/bin/java_home)
+export PATH=$(JAVA_HOME)/bin:$PATH
+
 GIT_PS1_SHOWDIRTYSTATE=1
 
 # added by travis gem
