@@ -2,29 +2,12 @@
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
-# ASP.NET version manager
-source dnvm.sh
-
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR="subl"
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH=/usr/local/linkedin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PS1='$(__git_ps1 "(%s)")\W$ '
-
-# Docker related things
-eval $(boot2docker shellinit)
-
-# Visual Studio Code
-code() {
-  if [[ $# = 0 ]]
-  then
-    open -a "Visual Studio Code"
-  else
-    [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
-    open -a "Visual Studio Code" --args "$F"
-  fi
-}
 
 if
   which rbenv > /dev/null;
@@ -88,15 +71,4 @@ function gb () {
 # Show git status for current directory
 function gs {
   git status
-}
-
-# Code
-code() {
-  if [[ $# = 0 ]]
-  then
-    open -a "Visual Studio Code"
-  else
-    [[ $1 = /* ]] && F="$1" || F="$PWD/$1#./"
-    open -a "Visual Studio Code" --args "$F"
-  fi
 }
