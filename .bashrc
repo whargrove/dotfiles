@@ -5,7 +5,7 @@ source $(brew --prefix nvm)/nvm.sh
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR="subl"
-export PATH=/usr/local/linkedin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH=/usr/local/linkedin/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PS1='$(__git_ps1 "(%s)")\W$ '
 
