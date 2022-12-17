@@ -1,1 +1,12 @@
+# fonts
+tap "homebrew/cask-fonts"
+cask "font-fira-code-nerd-font"
+
+# user home dir for brew install --cask
+cask_args appdir: "~/Applications", require_sha: true
+cask "alfred"
+cask "omnifocus"
+
+brew "starship"
+brew "emacs"
 brew "stow"
