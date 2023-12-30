@@ -28,3 +28,6 @@ source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh
 
 # llvm
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# editor
+export EDITOR="emacs -nw"
