@@ -2,6 +2,10 @@
 tap "homebrew/cask-fonts"
 cask "font-fira-code-nerd-font"
 
+# emacs-plus
+# https://github.com/d12frosted/homebrew-emacs-plus
+tap "d12frosted/emacs-plus"
+
 # user home dir for brew install --cask
 cask_args appdir: "~/Applications", require_sha: true
 cask "alfred"
