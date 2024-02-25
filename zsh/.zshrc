@@ -31,3 +31,9 @@ export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # editor
 export EDITOR="emacs -nw"
+
+# Initialize sdkman
+# https://sdkman.io/
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
