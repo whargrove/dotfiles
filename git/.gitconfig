@@ -1,0 +1,40 @@
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
+[commit]
+	gpgsign = true
+[user]
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEE+qiRvyNsxELq7A55Ddqj3wuj3iaM66Wx3c8NJKWm
+	email = wes@hargrove.me
+	name = Wes Hargrove
+[core]
+	excludesFile = /home/wes/.gitignore
+	pager = delta
+	editor = emacs
+[merge]
+	conflictStyle = zdiff3
+[diff]
+	tool = difftastic
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+	difftool = true
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	light = false
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
+	insteadOf = "gh:"
+[log]
+	date = iso
+[branch]
+	sort = -committerdate
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
+[fetch]
+	prune = true
