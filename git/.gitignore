@@ -1,0 +1,4 @@
+# paths in this file will be globally ignored by git workspaces.
+# c.f. https://sebastiandedeyne.com/setting-up-a-global-gitignore-file
+
+.vscode/
