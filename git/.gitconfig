@@ -11,7 +11,7 @@
 [core]
 	excludesFile = /home/wes/.gitignore
 	pager = delta
-	editor = emacs
+	editor = emacsclient -t
 [merge]
 	conflictStyle = zdiff3
 [diff]
