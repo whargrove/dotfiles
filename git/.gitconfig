@@ -2,6 +2,7 @@
 	format = ssh
 [gpg "ssh"]
 	program = /opt/1Password/op-ssh-sign
+	allowedSignersFile = /home/wes/.config/git/allowed_signers_file
 [commit]
 	gpgsign = true
 [user]
