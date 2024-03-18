@@ -43,7 +43,7 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 export PATH="$HOME/.local/bin:$PATH"
 
 # editor
-export EDITOR="emacs -nw"
+export EDITOR="emacsclient -t"
 
 # Initialize sdkman
 # https://sdkman.io/
