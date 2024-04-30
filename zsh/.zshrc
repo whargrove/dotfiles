@@ -1,3 +1,8 @@
+# if macOS, assume that Homebrew is installed
+if [[ "$(uname)" == "Darwin" ]]; then
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+fi
+
 # starship
 eval "$(starship init zsh)"
 
