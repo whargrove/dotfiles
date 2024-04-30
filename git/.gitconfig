@@ -28,9 +28,6 @@
 [delta]
 	navigate = true
 	light = false
-[url "git@github.com:"]
-	insteadOf = "https://github.com/"
-	insteadOf = "gh:"
 [log]
 	date = iso
 [branch]
