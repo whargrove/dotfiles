@@ -1,7 +1,6 @@
 # fonts
 tap "homebrew/cask-fonts"
 cask "font-bitstream-vera-sans-mono-nerd-font"
-cask "font-bitstream-vera-sans-mono"
 cask "font-fira-code-nerd-font"
 cask "font-fira-code"
 cask "font-hack-nerd-font"
@@ -15,7 +14,7 @@ cask "font-monaspace"
 # emacs-plus
 # https://github.com/d12frosted/homebrew-emacs-plus
 tap "d12frosted/emacs-plus"
-brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-native-comp", "with-savchenkovaleriy-big-sur-icon"]
+brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-savchenkovaleriy-big-sur-icon"]
 
 # user home dir for brew install --cask
 cask_args appdir: "~/Applications", require_sha: true
