@@ -1,60 +1,77 @@
-# if macOS, assume that Homebrew is installed
-if [[ "$(uname)" == "Darwin" ]]; then
-    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# starship
-eval "$(starship init zsh)"
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # If you're using macOS, you'll want this enabled
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Use fzf for fuzzy searching
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-###########
-# HISTORY #
-###########
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
-# Immediately append to history:
-setopt INC_APPEND_HISTORY
-# Record timestamp in history:
-setopt EXTENDED_HISTORY
-# Ignore duplicate entries first when trimming:
-setopt HIST_EXPIRE_DUPS_FIRST
-# Do not record an entry that was just recorded:
-setopt HIST_IGNORE_DUPS
-# Delete old recorded entry if new entry is a duplicate:
-setopt HIST_IGNORE_ALL_DUPS
-# Do not display a line previous found:
-setopt HIST_FIND_NO_DUPS
-# Do not record entry starting with a space:
-setopt HIST_IGNORE_SPACE
-# Do not write duplicate entries in history:
-setopt HIST_SAVE_NO_DUPS
-# Share history between all sessions:
-setopt SHARE_HISTORY
-# Execute commands using history (e.g.: using !$) immediately:
-unsetopt HIST_VERIFY
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-if which pyenv >/dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# Add ~/.local/bin to PATH
-export PATH="$HOME/.local/bin:$PATH"
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
-# editor
-export EDITOR="emacsclient -t"
-alias e="emacsclient -t"
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::command-not-found
 
-# Initialize sdkman
-# https://sdkman.io/
-# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# Load completions
+autoload -Uz compinit && compinit
 
-export SSH_AUTH_SOCK=~/.1password/agent.sock
+zinit cdreplay -q
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
+
+# History
+HISTSIZE=50000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+
+# Aliases
+alias ls='ls --color'
+
+# Shell integrations
+eval "$(fzf --zsh)"
