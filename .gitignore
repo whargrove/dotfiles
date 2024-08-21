@@ -25,3 +25,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+emacs/.emacs.d/auto-save-list/
+emacs/.emacs.d/eln-cache
+emacs/.emacs.d/elpa
