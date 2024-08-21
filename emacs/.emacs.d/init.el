@@ -71,7 +71,6 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)
 
 ;; Nov.el
 ;; https://depp.brause.cc/nov.el/
