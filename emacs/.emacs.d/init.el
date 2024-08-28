@@ -87,5 +87,8 @@
 	visual-fill-column-center-text t))
 
 (defun wes/nov-font ()
-  (face-remap-add-relative 'variable-pitch :family "Liberation Serif"
+  (face-remap-add-relative 'variable-pitch :family "Free Serif"
 			                   :height 1.3))
+
+;; Window Management
+(global-set-key (kbd "M-o") 'other-window)
