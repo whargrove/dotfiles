@@ -95,3 +95,5 @@
 
 ;; Window Management
 (global-set-key (kbd "M-o") 'other-window)
+;; Global Imenu
+(global-set-key (kbd "M-i") 'imenu)
