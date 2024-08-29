@@ -6,6 +6,15 @@
       auto-save-file-name-transforms
       `(("." "~/.emacs.d/auto-save-list/" t)))
 
+;; Melpa
+;; https://melpa.org/#/getting-started
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/") t)
+
+(use-package helm
+  :ensure t)
+
 (use-package magit
   :ensure t)
 
@@ -65,13 +74,6 @@
 ;; improve scrolling behavior
 (setq scroll-step 1
       scroll-conservatively 1)
-
-;; Melpa
-;; https://melpa.org/#/getting-started
-(require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
-
 
 ;; Nov.el
 ;; https://depp.brause.cc/nov.el/
