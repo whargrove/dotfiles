@@ -78,11 +78,9 @@ eval "$(fzf --zsh)"
 # TODO uv
 
 # gcloud
-#source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-#source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+source /etc/profile.d/google-cloud-cli.sh
 
 export PATH="$HOME/.local/bin:$PATH"
-
 . "$HOME/.cargo/env"
 
 # fnm
@@ -91,3 +89,4 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/wes/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
