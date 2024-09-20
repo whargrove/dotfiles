@@ -3,3 +3,6 @@
 .emacs.d/nov-places
 .emacs.d/tree-sitter
 .emacs.d/url
+.emacs.d/history
+.emacs.d/ido.last
+.emacs.d/transient
