@@ -4,68 +4,81 @@
 (setq backup-directory-alist
       `(("." . "~/.emacs.d/backups"))
       auto-save-file-name-transforms
-      `(("." "~/.emacs.d/auto-save-list/" t)))
+      `((".*" "~/.emacs.d/auto-save-list/\\1" t)))
+
+;; only hidpi screens so make the default font more readable
+(set-face-attribute 'default nil :height 140)
+
+;; fonts
+(defvar my/fixed-width-font "JetBrains Mono")
+(set-face-attribute 'default nil :font my/fixed-width-font :weight 'regular)
+(set-face-attribute 'fixed-pitch nil :font my/fixed-width-font :weight 'regular)
+(defvar my/variable-width-font "Iosevka Aile")
+(set-face-attribute 'variable-pitch nil :font my/variable-width-font :weight 'regular)
 
 ;; Melpa
 ;; https://melpa.org/#/getting-started
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
 
-(use-package helm
+(use-package exec-path-from-shell
   :ensure t)
+(when (daemonp)
+  (exec-path-from-shell-initialize))
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
-(use-package magit
-  :ensure t)
-
-(use-package company
-  :ensure t
-  :hook (emacs-lisp-mode . company-tng-mode)
-  :config
-  (setq company-idle-delay 0.5
-	company-minimum-prefix-length 2))
-
-(use-package projectile
-  :ensure t
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
-
-(use-package eglot
-  :ensure t
-  :demand t
-  :bind (:map eglot-mode-map
-	      ("C-c f" . eglot-format-buffer)))
-
-(use-package rust-mode
-  :ensure t)
-
-(use-package rust-ts-mode
-  :ensure t
-  :after (eglot)
-  :hook ((rust-ts-mode . eglot-ensure)
-	 (rust-ts-mode . company-tng-mode))
-  :config
-  (add-to-list 'auto-mode-list '("\\.rs\\'" . rust-ts-mode))
-  (add-to-list 'eglot-server-programs '(rust-ts-mode . ("rust-analyzer"))))
-
+;; Save minibuffer command history
+(savehist-mode 1)
+;; Use vertico to show commands in minibuffer in a vertical list.
+;; https://github.com/minad/vertico
 (use-package vertico
   :ensure t
   :config
+  (setq vertico-cycle t)
+  (setq vertico-resize nil)
   (vertico-mode 1))
 
-(setq-default fill-column 80)
-(add-hook 'prog-mode-hook
-	  (defun wes/prog-mode-hook ()
-	    (display-line-numbers-mode)
-	    (display-fill-column-indicator-mode)))
+;; Fill the whitespace in minibuffer commands with description
+;; https://github.com/minad/marginalia
+(use-package marginalia
+  :ensure t
+  :config
+  (marginalia-mode 1))
 
-(desktop-save-mode 1)
+(use-package orderless
+  :ensure t
+  :config
+  (setq completion-styles '(orderless basic)))
 
-(load-theme 'tango-dark)
+(use-package consult
+  :ensure t
+  :bind (;; A recursive grep
+         ("M-s M-g" . consult-grep)
+         ;; Search for files names recursively
+         ("M-s M-f" . consult-find)
+         ;; Search through the outline (headings) of the file
+         ("M-s M-o" . consult-outline)
+         ;; Search the current buffer
+         ("M-s M-l" . consult-line)
+         ;; Switch to another buffer, or bookmarked file, or recently
+         ;; opened file.
+         ("M-s M-b" . consult-buffer)))
+
+;; Make it look nicer
+(use-package ef-themes
+  :ensure t)
+(use-package modus-themes
+  :ensure t)
+(load-theme 'modus-vivendi)
+
+;; Keep the menu-bar since it can be useful!
+(menu-bar-mode 1)
 
 ;; Disable all bars
 (tool-bar-mode -1)
-(menu-bar-mode -1)
 (scroll-bar-mode -1)
 
 (setq inhibit-slash-screen t)
@@ -75,25 +88,126 @@
 (setq scroll-step 1
       scroll-conservatively 1)
 
-;; Nov.el
-;; https://depp.brause.cc/nov.el/
-(use-package nov
-  :ensure t
-  :hook (('nov-mode-hook . 'wes/nov-font)
-	 ('nov-mode-hook . 'visual-line-mode)
-	 ('nov-mode-hook . 'visual-fill-column))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-  (setq fill-column 120
-	nov-text-width (- fill-column 2)
-	visual-fill-column-center-text t))
-
-(defun wes/nov-font ()
-  (interactive)
-  (face-remap-add-relative 'variable-pitch :family "Noto Serif"
-			   :height 1.2))
-
 ;; Window Management
 (global-set-key (kbd "M-o") 'other-window)
 ;; Global Imenu
 (global-set-key (kbd "M-i") 'imenu)
+
+(defun sudo ()
+  "Use TRAMP to `sudo' the current buffer."
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:"
+             buffer-file-name))))
+
+;; packages begin here
+
+(use-package notmuch
+  :load-path "/usr/share/emacs/site-lisp/"
+  :defer t
+  :commands (notmuch notmuch-mua-new-mail))
+  
+
+;; nov.el
+;; https://depp.brause.cc/nov.el/
+
+(use-package visual-fill-column
+  :ensure t)
+
+(defun my/nov-setup ()
+  (interactive)
+  (unless visual-line-mode
+    (visual-line-mode 1))
+  (unless visual-fill-column-mode
+    (run-with-idle-timer 1 nil #'visual-fill-column-mode))
+  (setq-local fill-column 110
+	      nov-text-width 110
+	      visual-fill-column-center-text t))
+
+(use-package nov
+  :ensure t
+  :hook (nov-mode . my/nov-setup)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+
+;; magit
+;; https://magit.vc/
+(use-package magit
+  :ensure t)
+
+;; company
+;; http://company-mode.github.io/
+(use-package company
+  :ensure t)
+(global-company-mode)
+
+(defun my/prog-mode-hook ()
+  ; enable line numbers
+  (display-line-numbers-mode 1))
+(add-hook 'prog-mode-hook 'my/prog-mode-hook)
+
+;; eglot
+;; https://github.com/joaotavora/eglot
+(require 'eglot)
+;; define hooks to ensure eglot is enabled
+(add-hook 'js-ts-mode-hook 'eglot-ensure)
+(add-hook 'ts-ts-mode-hook 'eglot-ensure)
+
+(require 'treesit)
+;; javascript/typescript
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
+;; spaces (not tabs)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+;; TODO javascript
+;; TODO python
+;; TODO rust
+
+;; org
+(use-package org
+  :ensure t)
+(setq org-agenda-files (quote ("~/org/inbox.org"
+			       "~/org/personal.org"
+			       "~/org/work.org"
+			       "~/org/reading.org")))
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+	      (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+	      ("NEXT" :foreground "blue" :weight bold)
+	      ("DONE" :foreground "forest green" :weight bold)
+	      ("WAITING" :foreground "orange" :weight bold)
+	      ("HOLD" :foreground "magenta" :weight bold)
+	      ("CANCELLED" :foreground "forest green" :weight bold))))
+(setq org-use-fast-todo-selection t)
+(setq org-directory "~/org")
+(setq org-default-notes-file "~/org/inbox.org")
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-capture-templates
+      (quote (("t" "todo" entry (file "~/org/inbox.org")
+	       "* TODO %?\n%U\n%a\n"))))
+(setq org-refile-targets (quote ((nil :maxlevel . 9)
+				 (org-agenda-files :maxlevel . 9))))
+(setq org-refile-use-outline-path t)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+(setq org-completion-use-ido t)
+(setq ido-everywhere t)
+(setq ido-max-directory-size 100000)
+(ido-mode (quote both))
+(setq ido-default-file-method 'selected-window)
+(setq ido-default-buffer-method 'selected-window)
+(setq org-indirect-buffer-display 'current-window)
+(defun wh/verify-refile-target ()
+  "Exclude TODO keywords with a DONE state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+(setq org-refile-target-verify-function 'wh/verify-refile-target)
+
+;; packages end here
+
+;; init.el ends here
