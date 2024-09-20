@@ -1,0 +1,5 @@
+.emacs.d/backups
+.emacs.d/eshell
+.emacs.d/nov-places
+.emacs.d/tree-sitter
+.emacs.d/url
