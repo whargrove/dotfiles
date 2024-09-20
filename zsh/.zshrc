@@ -87,7 +87,7 @@ export PATH="$HOME/.local/bin:$PATH"
 FNM_PATH="/home/wes/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="/home/wes/.local/share/fnm:$PATH"
-  eval "`fnm env`"
+  eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
