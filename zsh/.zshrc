@@ -75,19 +75,24 @@ alias ls='ls --color'
 # Shell integrations
 eval "$(fzf --zsh)"
 
-# TODO uv
-
 # gcloud
-source /etc/profile.d/google-cloud-cli.sh
+# when installing via aur, this file is provided as a convenience
+# to setting up the shell environment to work with google-cloud-sdk
+# it's only needed on Linux, when using homebrew to install it "just works"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  source /etc/profile.d/google-cloud-cli.sh
+fi
 
-export PATH="$HOME/.local/bin:$PATH"
-. "$HOME/.cargo/env"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
 # fnm
-FNM_PATH="/home/wes/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/wes/.local/share/fnm:$PATH"
-  eval "$(fnm env --use-on-cd --shell zsh)"
+if command -v fnm > /dev/null 2>&1; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+  else
+    export PATH="/home/wes/.local/share/fnm:$PATH"
+    eval "$(fnm env --use-on-cd --shell zsh)"
+  fi
 fi
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
