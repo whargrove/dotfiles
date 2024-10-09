@@ -193,7 +193,7 @@
 	       "* TODO %?\n%U\n%a\n"))))
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
 				 (org-agenda-files :maxlevel . 9))))
-(setq org-refile-use-outline-path t)
+(setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 (setq org-completion-use-ido t)
