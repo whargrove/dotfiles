@@ -36,3 +36,5 @@
 	ignoreRevsFile = .git-blame-ignore-revs
 [fetch]
 	prune = true
+[includeIf "gitdir:~/workspace/vire/"]
+  path = ~/.gitconfig-work
