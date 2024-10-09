@@ -96,3 +96,4 @@ if command -v fnm > /dev/null 2>&1; then
 fi
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
