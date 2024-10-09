@@ -136,6 +136,14 @@
 (use-package magit
   :ensure t)
 
+;; magit-forge
+;; https://magit.vc/manual/forge/
+(use-package forge
+  :ensure t
+  :after magit)
+;; TODO: use gpg
+(setq auth-sources '("~/.authinfo"))
+
 ;; company
 ;; http://company-mode.github.io/
 (use-package company
@@ -207,6 +215,22 @@
   "Exclude TODO keywords with a DONE state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 (setq org-refile-target-verify-function 'wh/verify-refile-target)
+
+;; projectile
+
+(defun my-projectile-magit-status ()
+  "Open magit-status when switching to a project."
+  (magit-status (projectile-project-root)))
+
+(use-package projectile
+  :ensure t
+  :after magit
+  :config
+  (projectile-mode +1)
+  (setq projectile-project-search-path '(("~/workspace" . 1)))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  :hook
+  (projectile-after-switch-project . #'my-projectile-magit-status))
 
 ;; packages end here
 
