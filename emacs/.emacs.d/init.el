@@ -232,6 +232,17 @@
   :hook
   (projectile-after-switch-project . #'my-projectile-magit-status))
 
+;; pdf-tools
+(use-package pdf-tools
+  :ensure t
+  :defer t
+  :commands (pdf-loader-install)
+  :mode "\\.pdf\\'"
+  :init (pdf-loader-install)
+  :config (add-to-list 'revert-without-query ".pdf"))
+;; disable line numbers when viewing a PDF
+(add-hook 'pdf-view-mode-hook #'(lambda () (interactive) (display-line-numbers-mode -1)))
+
 ;; packages end here
 
 ;; init.el ends here
