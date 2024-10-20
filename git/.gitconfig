@@ -38,3 +38,5 @@
 	prune = true
 [includeIf "gitdir:~/workspace/vire/"]
   path = ~/.gitconfig-work
+[github]
+	user = whargrove
