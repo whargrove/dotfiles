@@ -243,6 +243,11 @@
 ;; disable line numbers when viewing a PDF
 (add-hook 'pdf-view-mode-hook #'(lambda () (interactive) (display-line-numbers-mode -1)))
 
+(use-package prettier
+  :ensure t
+  :hook
+  ((typescript-ts-mode tsx-ts-mode js-ts-mode json-ts-mode) . prettier-mode))
+
 ;; packages end here
 
 ;; init.el ends here
