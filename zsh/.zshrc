@@ -97,3 +97,11 @@ fi
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+# fnm
+FNM_PATH="/home/wes/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/wes/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
