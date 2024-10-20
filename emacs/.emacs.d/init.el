@@ -68,11 +68,28 @@
          ("M-s M-b" . consult-buffer)))
 
 ;; Make it look nicer
-(use-package ef-themes
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-zenburn t)
+  (doom-themes-visual-bell-config)
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config))
+
+(use-package solaire-mode
+  :ensure t
+  :config
+  (solaire-global-mode +1))
+
+(use-package nerd-icons
   :ensure t)
-(use-package modus-themes
-  :ensure t)
-(load-theme 'modus-vivendi)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 ;; Keep the menu-bar since it can be useful!
 (menu-bar-mode 1)
