@@ -85,7 +85,9 @@
   (solaire-global-mode +1))
 
 (use-package nerd-icons
-  :ensure t)
+  :ensure t
+  :custom
+  (nerd-icons-font-family "JetBrainsMono Nerd Font"))
 
 (use-package doom-modeline
   :ensure t
