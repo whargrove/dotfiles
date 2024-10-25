@@ -73,7 +73,7 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-zenburn t)
+  (load-theme 'doom-tomorrow-night t)
   (doom-themes-visual-bell-config)
   (setq doom-themes-treemacs-theme "doom-colors")
   (doom-themes-treemacs-config)
@@ -87,7 +87,7 @@
 (use-package nerd-icons
   :ensure t
   :custom
-  (nerd-icons-font-family "JetBrainsMono Nerd Font"))
+  (nerd-icons-font-family "Symbols Nerd Fonts Mono"))
 
 (use-package doom-modeline
   :ensure t
