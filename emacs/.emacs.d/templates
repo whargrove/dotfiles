@@ -1,0 +1,5 @@
+;; ~/.emacs.d/templates
+
+markdown-mode
+
+(ghcallout "> [!" (p (completing-read "Callout Type:" '("NOTE" "TIP" "IMPORTANT" "CAUTION" "WARNING") nil t)) "]" n ">" q)
