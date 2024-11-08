@@ -87,7 +87,7 @@
 (use-package nerd-icons
   :ensure t
   :custom
-  (nerd-icons-font-family "Symbols Nerd Fonts Mono"))
+  (nerd-icons-font-family "Symbols Nerd Font Mono"))
 
 (use-package doom-modeline
   :ensure t
