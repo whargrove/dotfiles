@@ -331,6 +331,18 @@
     :stream t
     :models '(llama3.2:3b)))
 
+(use-package elfeed
+  :ensure t
+  :config
+  (global-set-key (kbd "C-x w") 'elfeed))
+
+(use-package elfeed-org
+  :ensure t
+  :after elfeed
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/org/feeds.org")))
+
 ;; packages end here
 
 ;; init.el ends here
