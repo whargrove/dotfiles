@@ -250,7 +250,9 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       (quote (("t" "todo" entry (file "~/org/inbox.org")
-	       "* TODO %?\n%U\n%a\n"))))
+	             "* TODO %?\n%U\n%a\n")
+              ("b" "bookmark" entry (file+headline "~/org/personal.org" "Bookmarks")
+               "* %a\n%?\n"))))
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
 				 (org-agenda-files :maxlevel . 9))))
 (setq org-refile-use-outline-path 'file)
