@@ -174,12 +174,28 @@
   (display-line-numbers-mode 1))
 (add-hook 'prog-mode-hook 'my/prog-mode-hook)
 
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode))
+
+(use-package flycheck-pos-tip
+  :ensure t
+  :init
+  (with-eval-after-load 'flycheck (flycheck-pos-tip-mode)))
+
 ;; eglot
 ;; https://github.com/joaotavora/eglot
 (require 'eglot)
 ;; define hooks to ensure eglot is enabled
 (add-hook 'js-ts-mode-hook 'eglot-ensure)
 (add-hook 'ts-ts-mode-hook 'eglot-ensure)
+
+(use-package pet
+  :ensure t
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
+(add-hook 'python-base-mode-hook 'eglot-ensure)
 
 (use-package treesit
   :mode (("\\.tsx\\'" . tsx-ts-mode))
@@ -222,6 +238,14 @@
     (combobulate-key-prefix "C-c o")
     :hook ((prog-mode . combobulate-mode))
     :load-path ("~/src/combobulate")))
+
+(use-package reformatter
+  :ensure t)
+(use-package ruff-format
+  :ensure t
+  :after reformatter
+  :hook
+  (python-base-mode . ruff-format-on-save-mode))
 
 ;; spaces (not tabs)
 (setq-default indent-tabs-mode nil)
