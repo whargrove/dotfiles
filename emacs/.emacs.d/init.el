@@ -191,12 +191,6 @@
 (add-hook 'js-ts-mode-hook 'eglot-ensure)
 (add-hook 'ts-ts-mode-hook 'eglot-ensure)
 
-(use-package pet
-  :ensure t
-  :config
-  (add-hook 'python-base-mode-hook 'pet-mode -10))
-(add-hook 'python-base-mode-hook 'eglot-ensure)
-
 (use-package treesit
   :mode (("\\.tsx\\'" . tsx-ts-mode))
   :preface
@@ -246,6 +240,14 @@
   :after reformatter
   :hook
   (python-base-mode . ruff-format-on-save-mode))
+
+(use-package lsp-pyright
+  :ensure t)
+
+(use-package pet
+  :ensure t
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
 
 ;; spaces (not tabs)
 (setq-default indent-tabs-mode nil)
@@ -305,7 +307,7 @@
   :after magit
   :config
   (projectile-mode +1)
-  (setq projectile-project-search-path '(("~/workspace" . 1)))
+  (setq projectile-project-search-path '(("~/workspace" . 2)))
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   :hook
   (projectile-after-switch-project . #'my-projectile-magit-status))
