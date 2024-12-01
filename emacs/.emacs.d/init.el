@@ -20,7 +20,7 @@
 ;; https://melpa.org/#/getting-started
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
+	           '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (use-package exec-path-from-shell
@@ -126,7 +126,7 @@
   :load-path "/usr/share/emacs/site-lisp/"
   :defer t
   :commands (notmuch notmuch-mua-new-mail))
-  
+
 
 ;; nov.el
 ;; https://depp.brause.cc/nov.el/
@@ -141,8 +141,8 @@
   (unless visual-fill-column-mode
     (run-with-idle-timer 1 nil #'visual-fill-column-mode))
   (setq-local fill-column 110
-	      nov-text-width 110
-	      visual-fill-column-center-text t))
+	            nov-text-width 110
+	            visual-fill-column-center-text t))
 
 (use-package nov
   :ensure t
@@ -170,9 +170,19 @@
 (global-company-mode)
 
 (defun my/prog-mode-hook ()
-  ; enable line numbers
+  ;; enable line numbers
   (display-line-numbers-mode 1))
 (add-hook 'prog-mode-hook 'my/prog-mode-hook)
+
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode))
+
+(use-package flycheck-pos-tip
+  :ensure t
+  :init
+  (with-eval-after-load 'flycheck (flycheck-pos-tip-mode)))
 
 ;; eglot
 ;; https://github.com/joaotavora/eglot
@@ -180,6 +190,12 @@
 ;; define hooks to ensure eglot is enabled
 (add-hook 'js-ts-mode-hook 'eglot-ensure)
 (add-hook 'ts-ts-mode-hook 'eglot-ensure)
+
+(use-package pet
+  :ensure t
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
+(add-hook 'python-base-mode-hook 'eglot-ensure)
 
 (use-package treesit
   :mode (("\\.tsx\\'" . tsx-ts-mode))
@@ -223,6 +239,14 @@
     :hook ((prog-mode . combobulate-mode))
     :load-path ("~/src/combobulate")))
 
+(use-package reformatter
+  :ensure t)
+(use-package ruff-format
+  :ensure t
+  :after reformatter
+  :hook
+  (python-base-mode . ruff-format-on-save-mode))
+
 ;; spaces (not tabs)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
@@ -231,28 +255,30 @@
 (use-package org
   :ensure t)
 (setq org-agenda-files (quote ("~/org/inbox.org"
-			       "~/org/personal.org"
-			       "~/org/work.org"
-			       "~/org/reading.org")))
+			                         "~/org/personal.org"
+			                         "~/org/work.org"
+			                         "~/org/reading.org")))
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-	      (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+	            (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "red" :weight bold)
-	      ("NEXT" :foreground "blue" :weight bold)
-	      ("DONE" :foreground "forest green" :weight bold)
-	      ("WAITING" :foreground "orange" :weight bold)
-	      ("HOLD" :foreground "magenta" :weight bold)
-	      ("CANCELLED" :foreground "forest green" :weight bold))))
+	            ("NEXT" :foreground "blue" :weight bold)
+	            ("DONE" :foreground "forest green" :weight bold)
+	            ("WAITING" :foreground "orange" :weight bold)
+	            ("HOLD" :foreground "magenta" :weight bold)
+	            ("CANCELLED" :foreground "forest green" :weight bold))))
 (setq org-use-fast-todo-selection t)
 (setq org-directory "~/org")
 (setq org-default-notes-file "~/org/inbox.org")
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       (quote (("t" "todo" entry (file "~/org/inbox.org")
-	       "* TODO %?\n%U\n%a\n"))))
+	             "* TODO %?\n%U\n%a\n")
+              ("b" "bookmark" entry (file+headline "~/org/personal.org" "Bookmarks")
+               "* %a\n%?\n"))))
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
-				 (org-agenda-files :maxlevel . 9))))
+				                         (org-agenda-files :maxlevel . 9))))
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
