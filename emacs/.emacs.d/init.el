@@ -20,7 +20,7 @@
 ;; https://melpa.org/#/getting-started
 (require 'package)
 (add-to-list 'package-archives
-	           '("melpa" . "https://melpa.org/packages/") t)
+	           '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (use-package exec-path-from-shell
@@ -190,6 +190,8 @@
 ;; define hooks to ensure eglot is enabled
 (add-hook 'js-ts-mode-hook 'eglot-ensure)
 (add-hook 'ts-ts-mode-hook 'eglot-ensure)
+(with-eval-after-load "eglot"
+  (add-to-list 'eglot-stay-out-of 'flymake))
 
 (use-package pet
   :ensure t
