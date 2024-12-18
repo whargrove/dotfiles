@@ -186,10 +186,14 @@
 
 ;; eglot
 ;; https://github.com/joaotavora/eglot
-(require 'eglot)
-;; define hooks to ensure eglot is enabled
-(add-hook 'js-ts-mode-hook 'eglot-ensure)
-(add-hook 'ts-ts-mode-hook 'eglot-ensure)
+(use-package eglot
+  :ensure t
+  :hook ((python-base-mode . eglot-ensure)
+         (js-ts-mode . eglot-ensure)
+         (ts-ts-mode . eglot-ensure))
+  :config
+  (add-to-list 'eglot-server-programs
+               '(python-base-mode . ("pyright-langserver" "--stdio"))))
 
 (use-package treesit
   :mode (("\\.tsx\\'" . tsx-ts-mode))
