@@ -100,7 +100,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(setq inhibit-slash-screen t)
+(setq inhibit-splash-screen t)
 (setq use-file-dialog nil)
 
 ;; improve scrolling behavior
