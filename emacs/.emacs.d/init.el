@@ -10,7 +10,7 @@
 (set-face-attribute 'default nil :height 140)
 
 ;; fonts
-(defvar my/fixed-width-font "JetBrains Mono")
+(defvar my/fixed-width-font "JetBrains Mono NerdFont Mono")
 (set-face-attribute 'default nil :font my/fixed-width-font :weight 'regular)
 (set-face-attribute 'fixed-pitch nil :font my/fixed-width-font :weight 'regular)
 (defvar my/variable-width-font "Iosevka Aile")
@@ -20,7 +20,11 @@
 ;; https://melpa.org/#/getting-started
 (require 'package)
 (add-to-list 'package-archives
-	           '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+             ;; some packages like nov have dependencies that only exist on unstable
+             ;; c.f. https://old.reddit.com/r/emacs/comments/1eev4zh/issue_installing_novel_emacs_29/
+             '("melpa" . "https://melpa.org/packages/") t
+	           ;; '("melpa-stable" . "https://stable.melpa.org/packages/") t
+             )
 (package-initialize)
 
 (use-package exec-path-from-shell
@@ -100,7 +104,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(setq inhibit-slash-screen t)
+(setq inhibit-splash-screen t)
 (setq use-file-dialog nil)
 
 ;; improve scrolling behavior
