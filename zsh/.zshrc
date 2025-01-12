@@ -85,16 +85,6 @@ fi
 
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
-# fnm
-if command -v fnm > /dev/null 2>&1; then
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    eval "$(fnm env --use-on-cd --shell zsh)"
-  else
-    export PATH="/home/wes/.local/share/fnm:$PATH"
-    eval "$(fnm env --use-on-cd --shell zsh)"
-  fi
-fi
-
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
@@ -102,6 +92,6 @@ export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 FNM_PATH="/home/wes/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="/home/wes/.local/share/fnm:$PATH"
-  eval "`fnm env`"
+  eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 fi
 
