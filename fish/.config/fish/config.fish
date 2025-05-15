@@ -14,7 +14,7 @@ set -gx SSH_AUTH_SOCK ~/.1password/agent.sock
 if [ -f '$HOME/google-cloud-sdk/path.fish.inc' ]; . '$HOME/google-cloud-sdk/path.fish.inc'; end
 
 # starship
-starship init fish | source
+#starship init fish | source
 
 # direnv
 direnv hook fish | source
