@@ -1,0 +1,31 @@
+* {
+  background-color: #1e1e1e;
+  text-color: #fff;
+}
+
+window {
+  padding: 0.5em;
+  width: 42%;
+}
+
+listview {
+  spacing: 0.25em;
+  padding: 4px 0;
+  lines: 7;
+}
+
+element-icon {
+  padding: 0.5em;
+  size: 2ch;
+}
+
+element selected {
+  background-color: #7e57c2;
+  text-color: #ccc;
+}
+
+element-text selected {
+  background-color: #7e57c2;
+  text-color: Black;
+}
+
