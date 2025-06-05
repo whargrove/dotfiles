@@ -10,9 +10,9 @@
 	email = wes@hargrove.me
 	name = Wes Hargrove
 [core]
-	excludesFile = /home/wes/.gitignore
+	excludesFile = "~/.gitignore"
 	pager = delta
-	editor = emacsclient -t
+	editor = zed --wait
 [merge]
 	conflictStyle = zdiff3
 [diff]
