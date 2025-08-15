@@ -1,3 +1,4 @@
 [user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILCfiU/3Koo+ScGHtMrrg9pLFO3kk8tLrnIel8MHI6RN
   name = Wes Hargrove
   email = wes@joinvire.com
