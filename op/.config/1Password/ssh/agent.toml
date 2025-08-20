@@ -1,6 +1,12 @@
 [[ssh-keys]]
-item = "archdesk"
+item = "Personal"
+vault = "Private"
+
+[[ssh-keys]]
+item = "Vire"
+vault = "Vire"
 
 [[ssh-keys]]
 item = "rattlesnake"
+vault = "Private"
 
