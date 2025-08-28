@@ -21,7 +21,14 @@
   },
   "languages": {
     "Python": {
-      "language_servers": ["basedpyright", "!pyright", "!pylsp"]
+      "language_servers": ["ruff", "basedpyright", "!pyright", "!pylsp"],
+      "format_on_save": "on",
+      "formatter": {
+        "code_actions": {
+          "source.fixAll.ruff": true,
+          "source.organizeImports.ruff": true
+        }
+      }
     }
   },
   "lsp": {
