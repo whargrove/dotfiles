@@ -10,3 +10,6 @@ vault = "Vire"
 item = "rattlesnake"
 vault = "Private"
 
+[[ssh-keys]]
+item = "kintla"
+vault = "Private"
