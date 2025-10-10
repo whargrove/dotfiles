@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "wrap_guides": [100],
   "disable_ai": true,
   "icon_theme": "Catppuccin Mocha",
   "telemetry": {
@@ -21,6 +22,9 @@
     "dark": "Catppuccin Mocha"
   },
   "languages": {
+    "TypeScript": {
+      "format_on_save": "prettier"
+    },
     "Python": {
       "language_servers": ["basedpyright", "ruff", "!pyright", "!pylsp"],
       "format_on_save": "on",
@@ -44,6 +48,14 @@
       "binary": {
         "path": ".venv/bin/basedpyright-langserver",
         "arguments": ["--stdio"]
+      },
+      "settings": {
+        "basedpyright.analysis": {
+          "diagnosticMode": "workspace",
+          "inlayHints": {
+            "callArgumentNames": false
+          }
+        }
       }
     }
   },
