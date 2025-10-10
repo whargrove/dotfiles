@@ -2,22 +2,8 @@
 live_config_reload = true
 
 [font]
-size = 16.0
-offset = { x = 0, y = 1 }
+size = 12.0
 
 [font.normal]
-family = "CaskaydiaMono Nerd Font"
+family = "CaskaydiaCove Nerd Font"
 style = "Regular"
-
-[font.bold]
-family = "CaskaydiaMono Nerd Font"
-style = "Bold"
-
-[font.italic]
-family = "CaskaydiaMono Nerd Font"
-style = "Italic"
-
-[font.bold_italic]
-family = "CaskaydiaMono Nerd Font"
-style = "Bold Italic"
-
